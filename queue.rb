@@ -10,12 +10,18 @@ class Queue
   end
 
   def enqueue element
-    @contents.insert_at_start element
-    @front = @contents.head
+    @contents.insert_at_end element
   end
 
   def dequeue
-    @contents.remove_from_end
+    if !@contents.empty?
+      value = @front
+      @contents.remove_from_start
+      @front = @contents.head
+      value
+    else
+      nil
+    end
   end
 
   def inspect
@@ -27,3 +33,19 @@ class Queue
   end
 
 end
+
+q = Queue.new(5)
+p q.inspect
+q.enqueue(2)
+p q.inspect
+p 'is it empty?'
+p q.empty?
+q.enqueue(1)
+p q.inspect
+p q.dequeue
+p q.dequeue
+p q.dequeue
+p q.dequeue
+p q.inspect
+p 'is it empty?'
+p q.empty?
